@@ -1,0 +1,17 @@
+
+.title{
+    text-align: center;
+    margin-top: 20px;
+    color: whitesmoke;
+}
+.content{
+    text-align: center;
+    margin-top: 20px;
+    color: whitesmoke;
+}
+.CommunityForum{
+    background-color: #000000;
+}
+.CommunityForum body{
+    color: #000000;
+}
