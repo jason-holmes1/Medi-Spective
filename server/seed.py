@@ -14,23 +14,30 @@ with app.app_context():
     #Create Journal Entries
     journal_entries = [
         JournalEntry(
-            title='Journal Entry 1',
-            content='Content for Journal Entry 1',
-            date=datetime(2021, 1, 1),
+            title='Starting bootcamp',
+            content='I am starting the bootcamp today. I am excited to learn new things and meet new people. Definitely a bit nervous, but I am ready to take on the challenge!',
+            date=datetime(2024, 1, 29),
             user_id=1
         ),
         JournalEntry(
-            title='Journal Entry 2',
-            content='Content for Journal Entry 2',
-            date=datetime(2021, 1, 2),
+            title='Introduction',
+            content='Hello I am new. I hope I can share my experience and spread love and positive energy to members here. Good day!',
+            date=datetime(2024, 2, 12),
             user_id=1
         ),
         JournalEntry(
             title='Journal Entry 3',
             content='Content for Journal Entry 3',
-            date=datetime(2021, 1, 3),
+            date=datetime(2024, 3, 30),
             user_id=2
-        )
+        ),
+        JournalEntry(
+            title='Journal Entry 4',
+            content='Content for Journal Entry 4',
+            date=datetime(2024, 4, 21),
+            user_id=2
+        ),
+
     ]
     for journal_entry in journal_entries:
         db.session.add(journal_entry)

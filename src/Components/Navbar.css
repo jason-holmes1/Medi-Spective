@@ -1,4 +1,12 @@
+.navbarcontainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-position: top;
+    
 
+}
 li{
     display: inline;
     padding: 10px;

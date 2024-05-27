@@ -25,7 +25,6 @@
     position: relative; /* Change to relative positioning */
     z-index: 1; /* Ensure the content is above the video */
     text-align: center;
-    color: #fff;
     margin-top: 20px; /* Adjust as needed */
   }
   
