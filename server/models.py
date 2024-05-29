@@ -53,8 +53,8 @@ class JournalEntry(db.Model,SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     content = db.Column(db.String(500), nullable=False)
-    date = db.Column(db.DateTime, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    date = db.Column(db.DateTime, nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
 
 
     def __repr__(self):
@@ -76,19 +76,34 @@ class JournalEntry(db.Model,SerializerMixin):
             raise AssertionError('Content must be less than 500 characters')
         return content
 
-    @validates('date')
-    def validate_date(self, key, date):
-        if not date:
-            raise AssertionError('No date provided')
-        return date
     
 class CommunityPost(db.Model,SerializerMixin):
-    __tablename__ = 'community_post'
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), nullable=False)
-    content = db.Column(db.String(500), nullable=False)
-    date = db.Column(db.DateTime, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    class CommunityPost(db.Model, SerializerMixin):
+        __tablename__ = 'community_post'
+        id = db.Column(db.Integer, primary_key=True)
+        title = db.Column(db.String(100), nullable=False)
+        content = db.Column(db.String(500), nullable=False)
+        date = db.Column(db.DateTime, nullable=True)
+        comments = db.relationship('Comments', backref='community_post', lazy=True)
+
+        def __repr__(self):
+            return f'<CommunityPost {self.title}>'
+
+        @validates('title')
+        def validate_title(self, key, title):
+            if not title:
+                raise AssertionError('No title provided')
+            if len(title) > 100:
+                raise AssertionError('Title must be less than 100 characters')
+            return title
+
+        @validates('content')
+        def validate_content(self, key, content):
+            if not content:
+                raise AssertionError('No content provided')
+            if len(content) > 500:
+                raise AssertionError('Content must be less than 500 characters')
+            return content
 
 
     def __repr__(self):
@@ -110,54 +125,15 @@ class CommunityPost(db.Model,SerializerMixin):
             raise AssertionError('Content must be less than 500 characters')
         return content
 
-    @validates('date')
-    def validate_date(self, key, date):
-        if not date:
-            raise AssertionError('No date provided')
-        return date
-    
-class MoodInput(db.Model,SerializerMixin):
-    __tablename__ = 'mood_input'
-    id = db.Column(db.Integer, primary_key=True)
-    mood = db.Column(db.Integer, nullable=False)
-    date = db.Column(db.DateTime, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
-
-    def __repr__(self):
-        return f'<MoodInput {self.mood}>'
-    @validates('mood')
-    def validate_mood(self, key, mood):
-        if not mood:
-            raise AssertionError('No mood provided')
-        if mood < 1 or mood > 10:
-            raise AssertionError('Mood must be between 1 and 10')
-        return mood
-
-    @validates('date')
-    def validate_date(self, key, date):
-        if not date:
-            raise AssertionError('No date provided')
-        return date
-class Resources(db.Model,SerializerMixin):
-    __tablename__ = 'resources'
+class Comments(db.Model,SerializerMixin):
+    __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     content = db.Column(db.String(500), nullable=False)
-    date = db.Column(db.DateTime, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
+    community_post_id = db.Column(db.Integer, db.ForeignKey('community_post.id'), nullable=True)
 
     def __repr__(self):
-        return f'<Resources {self.title}>'
-
-    @validates('title')
-    def validate_title(self, key, title):
-        if not title:
-            raise AssertionError('No title provided')
-        if len(title) > 100:
-            raise AssertionError('Title must be less than 100 characters')
-        return title
+        return f'<Comment {self.content}>'
 
     @validates('content')
     def validate_content(self, key, content):
@@ -167,8 +143,8 @@ class Resources(db.Model,SerializerMixin):
             raise AssertionError('Content must be less than 500 characters')
         return content
 
-    @validates('date')
-    def validate_date(self, key, date):
-        if not date:
-            raise AssertionError('No date provided')
-        return date
+    @validates('title')
+    def validate_date(self, key, title):
+        if not title:
+            raise AssertionError('No title provided')
+        return title

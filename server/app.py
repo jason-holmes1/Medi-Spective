@@ -3,9 +3,8 @@ from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
 # Local imports
 from config import app, db, api
-from models import  JournalEntry, CommunityPost
+from models import  JournalEntry, CommunityPost,Comments
 
-from flask_cors import CORS
 from flask import request, jsonify
 
 
@@ -108,16 +107,14 @@ def create_journal_entry():
         return jsonify({'error': '422 Unprocessable Entity'}), 400
     new_journal_entry = JournalEntry(
         title=data.get('title'),
-        content=data.get('content'),
-        date=data.get('date'),
-        user_id=data.get('user_id')
+        content=data.get('content')
     )
     try:
         db.session.add(new_journal_entry)
         db.session.commit()
         return jsonify(new_journal_entry.to_dict()), 201
     except Exception as e:
-        db.session.rollback()
+        db.session.rollback() 
         return jsonify({'error': str(e)}), 500
     
 
@@ -131,8 +128,6 @@ def update_journal_entry(id):
     journal_entry = JournalEntry.query.get(id)
     journal_entry.title = request.form['title']
     journal_entry.content = request.form['content']
-    journal_entry.date = request.form['date']
-    journal_entry.user_id = request.form['user_id']
     db.session.commit()
     return journal_entry
 
@@ -156,9 +151,7 @@ def create_community_post():
         return jsonify({'error': '422 Unprocessable Entity'}), 400
     new_community_post = CommunityPost(
         title=data.get('title'),
-        content=data.get('content'),
-        date=data.get('date'),
-        user_id=data.get('user_id')
+        content=data.get('content')
     )
     try:
         db.session.add(new_community_post)
@@ -179,8 +172,6 @@ def update_community_post(id):
     community_post = CommunityPost.query.get(id)
     community_post.title = request.form['title']
     community_post.content = request.form['content']
-    community_post.date = request.form['date']
-    community_post.user_id = request.form['user_id']
     db.session.commit()
     return community_post
 
@@ -191,7 +182,38 @@ def delete_community_post(id):
     db.session.commit()
     return community_post
 
+@app.route('/comments', methods=['POST'])
+def create_comment():
+    data = request.get_json()
+    if not data:
+        return jsonify({'error': '422 Unprocessable Entity'}), 400
+    new_comment = Comments(
+        content=data.get('content'),
+        title=data.get('title'),
+        community_post_id=data.get('community_post_id')
+    )
+    try:
+        db.session.add(new_comment)
+        db.session.commit()
+        return jsonify(new_comment.to_dict()), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
 
+@app.route('/comments/<int:id>', methods=['PUT'])
+def update_comment(id):
+    comment = Comments.query.get(id)
+    comment.content = request.form['content']
+    comment.title = request.form['title']
+    db.session.commit()
+    return comment
+
+@app.route('/comments/<int:id>', methods=['DELETE'])
+def delete_comment(id):
+    comment = Comments.query.get(id)
+    db.session.delete(comment)
+    db.session.commit()
+    return comment
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

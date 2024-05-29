@@ -21,3 +21,9 @@
 .CommunityForum body{
     color: #000000;
 }
+.newpost{
+    text-align: center;
+    margin-top: 20px;
+    color: black;
+    text-decoration-color: #000000;
+}

@@ -4,7 +4,7 @@ import Navbar from './Navbar';
 import Home from './Home';
 import Dashboard from './Dashboard';
 import Login from './Login';
-import CommunityForum from './CommunityForum';
+import NewEntries from './NewEntries';
 import Resources from './Resources';
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/login" component={Login} />
-          <Route path="/community-forum" component={CommunityForum} /> 
+          <Route path="/new-entries" component={NewEntries} /> 
           <Route path="/resources" component={Resources} />
         </Switch>
       </div>

@@ -13,7 +13,7 @@ function Navbar() {
           <li><Link to="/" className="button">*Home*</Link></li>
           <li><Link to="/dashboard" className="button">*Dashboard*</Link></li>
           <li><Link to="/login" className="button">*Login*</Link></li>
-          <li><Link to="/community-forum" className="button">*New Entries*</Link></li>
+          <li><Link to="/new-entries" className="button">*New Entries*</Link></li>
           <li><Link to="/resources" className="button">*Resources*</Link></li>
         </ul>
       </nav>

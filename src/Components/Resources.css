@@ -5,3 +5,23 @@
     background-position: left;
     size: scale;
 }
+.resourceTitle{
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin-top: 20px;
+    color: rgb(90, 84, 84);
+}
+.resourceContent{
+    text-align: center;
+    font-size: large;
+    font-family: cursive;
+    font-weight: bold;
+    margin-top: 20px;
+    color: black;
+}
+.hotlinks{
+    text-align: center;
+    margin-top: 20px;
+    color: black;
+    text-decoration-color: #000000;
+}

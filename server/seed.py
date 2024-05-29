@@ -17,25 +17,25 @@ with app.app_context():
             title='Starting bootcamp',
             content='I am starting the bootcamp today. I am excited to learn new things and meet new people. Definitely a bit nervous, but I am ready to take on the challenge!',
             date=datetime(2024, 1, 29),
-            user_id=1
+            
         ),
         JournalEntry(
             title='Introduction',
             content='Hello I am new. I hope I can share my experience and spread love and positive energy to members here. Good day!',
             date=datetime(2024, 2, 12),
-            user_id=1
+            
         ),
         JournalEntry(
-            title='Journal Entry 3',
-            content='Content for Journal Entry 3',
+            title='Stressed Out',
+            content='Ugh Flatiron has me feeling extremelt stressed out. I am not sure if I can keep up with the pace. I am going to try my best to stay positive and keep pushing through!',
             date=datetime(2024, 3, 30),
-            user_id=2
+            
         ),
         JournalEntry(
-            title='Journal Entry 4',
-            content='Content for Journal Entry 4',
+            title='Project mode',
+            content='So excited to see the culmination of all my work in project mode. I am so proud of myself for making it this far. I am going to give it my all and make sure I finish strong!',
             date=datetime(2024, 4, 21),
-            user_id=2
+            
         ),
 
     ]
@@ -45,21 +45,21 @@ with app.app_context():
     #Create Community Posts
     community_posts = [
         CommunityPost(
-            title='Community Post 1',
-            content='Content for Community Post 1',
-            date=datetime(2021, 1, 1),
-            user_id=1),
+            title='Anyone Else Struggle with ADHD?',
+            content='Hello everyone! I am new to the community and I am looking to connect with others who struggle with ADHD. I am looking for advice on how to stay focused and manage my time better. Any tips?',
+            date=datetime(2024, 1, 2),
+            ),
         CommunityPost(
-            title='Community Post 2',
-            content='Content for Community Post 2',
-            date=datetime(2021, 1, 2),
-            user_id=2
+            title='Anxiety is taking over :()',
+            content='Hey guys, lately, I have been feeling extremely anxious and I am not sure how to cope. I have tried meditating and exercising, but nothing seems to work. Any advice on how to manage anxiety?',
+            date=datetime(2024, 2, 22),
+           
         ),
         CommunityPost(
-            title='Community Post 3',
-            content='Content for Community Post 3',
-            date=datetime(2021, 1, 3),
-            user_id=2
+            title='Feel free to talk to me!',
+            content='New to the site and was reading through some posts. If anyone needs someone to talk to, I am here for you. Feel free to reach out to me anytime. We are all in this together!',
+            date=datetime(2021, 5, 12),
+           
         )
     ]
     for community_post in community_posts:
